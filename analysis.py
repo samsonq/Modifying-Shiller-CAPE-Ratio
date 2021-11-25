@@ -1,20 +1,21 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mlp
 mlp.style.use("seaborn")
 
 df=pd.read_pickle("df.pkl")
-df["E10"]=df["E"].rolling(window=120, min_periods=120).mean()
-df["P/E10"]=df.P/df["E10"]
+df['E10'] = df['Real Earnings'].rolling(window=120, min_periods=120).mean()
+df["P/E10"] = df['Real Price'] / df['E10']
 # Plot P
-plt.plot(df["Date Fraction"], df["P"])
+plt.plot(df["Date Fraction"], df["Real Price"])
 plt.title("Historical S&P Prices")
 plt.xlabel("Date")
 plt.ylabel("Stock Price, P")
 plt.savefig("SPY.png")
 plt.clf()
 # Plot E
-plt.plot(df["Date Fraction"], df["E"], label="E")
+plt.plot(df["Date Fraction"], df["Real Earnings"], label="E")
 plt.plot(df["Date Fraction"], df["E10"], label="E10")
 plt.title("Historical S&P Earnings")
 plt.xlabel("Date")
@@ -23,7 +24,7 @@ plt.legend()
 plt.savefig("E.png")
 plt.clf()
 # Plot D
-plt.plot(df["Date Fraction"], df["D"])
+plt.plot(df["Date Fraction"], df["Real Dividend"])
 plt.title("Historical S&P Dividends")
 plt.xlabel("Date")
 plt.ylabel("Dividends, D")
@@ -31,7 +32,7 @@ plt.savefig("D.png")
 plt.clf()
 # Plot CAPE
 plt.plot(df["Date Fraction"], df["CAPE"], label="CAPE")
-# plt.plot(df["Date Fraction"], df["P/E10"], label="CAPE_Reconstructed")
+plt.plot(df["Date Fraction"], df["P/E10"], label="CAPE_Reconstructed")
 plt.title("Historical S&P CAPE")
 plt.xlabel("Date")
 plt.ylabel("P/E10")
@@ -40,7 +41,6 @@ plt.savefig("CAPE.png")
 plt.clf()
 
 # Plot log(CAPE) log(E10_t+1/E10_t)
-import numpy as np
 df["10 yr. MAE growth"] = np.log(df.E10.shift(-12)/df.E10.shift())
 plt.xscale('log')
 plt.scatter(df["CAPE"], df["10 yr. MAE growth"])
