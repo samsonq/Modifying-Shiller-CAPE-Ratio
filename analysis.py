@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mlp
+import seaborn as sns
 mlp.style.use("seaborn")
 
 df=pd.read_pickle("df.pkl")
@@ -60,7 +61,6 @@ plt.title("Ten Year Price Growth vs CAPE")
 plt.savefig("E6B.png")
 plt.clf()
 
-
 # Plot Sparsely
 df_sparse=df[::6]
 df_sparse_old=df_sparse.loc[df_sparse["Date Fraction"]<=1991]
@@ -84,7 +84,6 @@ plt.title("Ten Year Price Growth vs CAPE")
 plt.savefig("E6B_sparse.png")
 plt.clf()
 
-import seaborn as sns
 # Plot Sparsely With Regression Lines
 df_sparse=df[::6]
 df_sparse_old=df_sparse.loc[df_sparse["Date Fraction"]<=1991]
@@ -107,5 +106,3 @@ plt.xlabel("CAPE, P/E10")
 plt.title("Ten Year Price Growth vs CAPE")
 plt.savefig("E6B_sparse_sns.png")
 plt.clf()
-
-
