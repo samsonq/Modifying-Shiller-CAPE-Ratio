@@ -6,7 +6,7 @@ df_acc = pd.read_pickle("../data/accounting.pkl")
 df_ie = pd.read_pickle("../data/df.pkl")
 
 def date_to_fraction(dt):
-  return int(dt.year)+(int(dt.month)-1)/12+(int(dt.day))/30/12
+    return int(dt.year)+(int(dt.month)-1)/12+(int(dt.day))/30/12
 
 df_acc["Date Fraction"]=df_acc["Date"].apply(date_to_fraction)
 
