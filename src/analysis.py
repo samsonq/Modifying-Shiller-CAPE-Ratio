@@ -5,7 +5,7 @@ import matplotlib as mlp
 import seaborn as sns
 mlp.style.use("seaborn")
 
-df=pd.read_pickle("df.pkl")
+df=pd.read_pickle("../data/df.pkl")
 df['E10'] = df['Real Earnings'].rolling(window=120, min_periods=120).mean()
 df["P/E10"] = df['Real Price'] / df['E10']
 # Plot P
