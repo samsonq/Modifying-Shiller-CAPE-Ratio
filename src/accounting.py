@@ -29,7 +29,7 @@ df_ie.loc[df_ie.PFE.isna(), "PFE"]=df_ie.loc[df_ie.PFE.isna()]["E"]
 assert initial_df_ie_len==len(df_ie)
 
 df_ie["Real PFE"] = df_ie["PFE"]*(df_ie["Real Earnings"]/df_ie["E"])
-# Plot the two Real Earning Serieses
+# Plot the two Real Earning Series
 plt.plot(df_ie["Date Fraction"], df_ie["Real Earnings"], label="(Nominal) E")
 plt.plot(df_ie["Date Fraction"], df_ie["Real PFE"], label="PFE") # Real
 plt.axvline(x=2000, color='r', linestyle='--')
@@ -42,3 +42,4 @@ plt.plot(df_ie["Date Fraction"], df_ie["CAPE"],label="CAPE (GAAP)")
 plt.plot(df_ie["Date Fraction"], df_ie["Accounting Adjusted CAPE"], label="CAPE (Pro-Forma)")
 plt.legend(); plt.savefig("CAPE_comparison.png"); plt.clf()
 
+df_ie.to_pickle("../data/ie_accounting.pkl")
